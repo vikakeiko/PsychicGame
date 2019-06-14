@@ -15,9 +15,7 @@ var cpuGuess = choice[Math.floor(Math.random() * choice.length)];
 // var pickLetter = prompt("Pick a letter from \"a\" to \"z\"?");
 
 document.onkeyup = function (event) {
-    // if(gameOver) {
-    //     return;
-    //   }
+  
 
     // user guess which key was pressed 
     var userGuess = event.key;
@@ -31,26 +29,40 @@ document.onkeyup = function (event) {
     console.log("User Guess: " + userGuess);
     console.log("Computer Guess " + cpuGuess);
 
-    if (!gameOver) {
-            if (userGuess === cpuGuess) {
-                win++;
-                alert("You guessed right!");
-                winDisplay.textContent = win;
-
-            }
-            if (userGuess !== cpuGuess) {
-                lose++;
-                alert("WRONGGG!");
-                loseDisplay.textContent = lose;
-                remainingGuesses--;
-                if(remainingGuesses === 0) {
-                  gameOver = true;
-                  alert("Game over!");
-                }
-            }
-        }
-        remainingGuess.innerText = remainingGuesses;
+    function reset(){
+        pickedGuess = [];
+        displayPicked = pickedGuess;
+        cpuGuess = choice[Math.floor(Math.random() * choice.length)];
+        remainingGuesses = 11;
     }
-   
 
+    if (!gameOver) {
+        if (userGuess === cpuGuess) {
+            win++;
+            alert("You guessed right!");
+            winDisplay.textContent = win;
+            // reset();
+            // pickedGuess = [];
+            // displayPicked = pickedGuess;
+            remainingGuesses = 11;
+            cpuGuess = choice[Math.floor(Math.random() * choice.length)];
+        }
+        if (userGuess !== cpuGuess) {
+            remainingGuesses--;
+        }
+        if (remainingGuesses === 0) {
+            gameOver = false;
+            alert("Game over!");
+            lose++;
+            loseDisplay.textContent = lose;
+            // pickedGuess = [];
+            // displayPicked = pickedGuess;
+            remainingGuesses = 10;
+            // reset();
+        }
+    }
+    remainingGuess.innerText = remainingGuesses;
+    pickedGuess = [];
+    displayPicked = pickedGuess;
+}
 
