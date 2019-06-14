@@ -1,10 +1,10 @@
 var win = 0;
 var lose = 0;
-var remaningGuesses = 10;
+var remainingGuesses = 10;
 var pickedGuess = [];
 var winDisplay = document.getElementById("win");
 var loseDisplay = document.getElementById("lose");
-var remaningGuess = document.getElementById("remainingGuesses");
+var remainingGuess = document.getElementById("remainingGuesses");
 var displayPicked = document.getElementById("picked");
 var gameOver = false;
 
@@ -15,6 +15,9 @@ var cpuGuess = choice[Math.floor(Math.random() * choice.length)];
 // var pickLetter = prompt("Pick a letter from \"a\" to \"z\"?");
 
 document.onkeyup = function (event) {
+    // if(gameOver) {
+    //     return;
+    //   }
 
     // user guess which key was pressed 
     var userGuess = event.key;
@@ -33,19 +36,20 @@ document.onkeyup = function (event) {
                 win++;
                 alert("You guessed right!");
                 winDisplay.textContent = win;
+
             }
             if (userGuess !== cpuGuess) {
                 lose++;
                 alert("WRONGGG!");
-                pickedGuess.push(userGuess);
                 loseDisplay.textContent = lose;
-                remaningGuesses--;
+                remainingGuesses--;
+                if(remainingGuesses === 0) {
+                  gameOver = true;
+                  alert("Game over!");
+                }
             }
-        }  else {
-            gameOver = true;
-            alert("Game over!");
         }
-        remaningGuess.innerText = remaningGuesses;
+        remainingGuess.innerText = remainingGuesses;
     }
    
 
