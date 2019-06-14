@@ -36,6 +36,7 @@ document.onkeyup = function (event) {
             remainingGuesses = 11;
             // computer has to pick a new letter after the result matches 
             cpuGuess = choice[Math.floor(Math.random() * choice.length)];
+            pickedGuess = [];
         }
         // lose situation 
         if (userGuess !== cpuGuess) {
@@ -47,11 +48,11 @@ document.onkeyup = function (event) {
             lose++;
             loseDisplay.textContent = lose;
             remainingGuesses = 10;
+            pickedGuess = [];
         }
     }
     remainingGuess.innerText = remainingGuesses;
     // the picked array has to be cleaned up 
-    pickedGuess = [];
-    displayPicked = pickedGuess;
+    displayPicked.textContent = pickedGuess.join(' ');
 }
 
