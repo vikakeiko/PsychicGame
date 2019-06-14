@@ -11,9 +11,6 @@ var gameOver = false;
 var choice = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var cpuGuess = choice[Math.floor(Math.random() * choice.length)];
 
-
-// var pickLetter = prompt("Pick a letter from \"a\" to \"z\"?");
-
 document.onkeyup = function (event) {
   
 
@@ -29,24 +26,18 @@ document.onkeyup = function (event) {
     console.log("User Guess: " + userGuess);
     console.log("Computer Guess " + cpuGuess);
 
-    function reset(){
-        pickedGuess = [];
-        displayPicked = pickedGuess;
-        cpuGuess = choice[Math.floor(Math.random() * choice.length)];
-        remainingGuesses = 11;
-    }
-
     if (!gameOver) {
+        // win situation
         if (userGuess === cpuGuess) {
             win++;
             alert("You guessed right!");
+            // change display as well 
             winDisplay.textContent = win;
-            // reset();
-            // pickedGuess = [];
-            // displayPicked = pickedGuess;
             remainingGuesses = 11;
+            // computer has to pick a new letter after the result matches 
             cpuGuess = choice[Math.floor(Math.random() * choice.length)];
         }
+        // lose situation 
         if (userGuess !== cpuGuess) {
             remainingGuesses--;
         }
@@ -55,13 +46,11 @@ document.onkeyup = function (event) {
             alert("Game over!");
             lose++;
             loseDisplay.textContent = lose;
-            // pickedGuess = [];
-            // displayPicked = pickedGuess;
             remainingGuesses = 10;
-            // reset();
         }
     }
     remainingGuess.innerText = remainingGuesses;
+    // the picked array has to be cleaned up 
     pickedGuess = [];
     displayPicked = pickedGuess;
 }
